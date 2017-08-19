@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.myinterface.UserInterface">
+	<resultMap type="pojo.User" id="userMap">
+		<id property="uName" column="userName"/>
+		<result property="upwd" column="pwd"/>
+		<result property="status" column="status"/>
+	</resultMap>
+	
+	<select id="getTableList" resultType="tb">
+		select * from t_sifu where flag != 1
+	</select>
+	
+	<select id="getUser" parameterType="String" resultType="user" resultMap="userMap">
+		select * from t_user where userName = #{uName} and flag != 1
+	</select>
+	
+	<insert id="registor" parameterType="User" >
+		insert into t_user(userName,pwd,status) values(
+			#{uName}, 
+			#{upwd}, 
+			#{status}
+		)
+	</insert>
+	
+	<insert id="saveSiFu">
+		insert into t_usersifu(userName, sIP) values(
+				#{uName},
+				#{sIP}	
+		)
+	</insert>
+	
+	<select id="hasSave" resultType="int">
+		select count(*) from t_usersifu where
+			 userName = #{uName} and
+			 sIP = #{sIP}
+	</select>
+	
+	<select id="getSaveSiFu" parameterType="String" resultType="tb">
+		select * from t_sifu where sIP in (
+			select sIP from t_usersifu where userName = #{uName}
+		)
+	</select>
+	
+	<delete id="cancelSave">
+		delete from t_usersifu where
+			userName = #{uName} and
+			sIP = #{sIP}
+	</delete>
+	
+	<select id="canUpdateU" parameterType="String" resultType="int">
+		select count(*) from t_user where userName = #{newName}
+	</select>
+	
+	<update id="updateU">
+		update t_user set userName = #{newName} ,
+						  pwd = #{newpwd} 
+						  where userName = #{oldName}
+	</update>
+	
+</mapper>

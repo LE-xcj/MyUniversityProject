@@ -1,0 +1,81 @@
+@CHARSET "UTF-8";
+
+.body1{
+	background: url(../../image/bg.jpg) center 0 no-repeat;
+}
+
+.up1{
+	width: 1000px;
+	height: 120px;
+	margin: -9px auto;
+	position: relative;
+	overflow: hidden;
+	background: url(../../image/945.jpg) no-repeat;
+}
+
+.jsf{
+	width: 250px;
+	height: 90px;
+	position: absolute;
+	left: 90px;
+	top: 15px;
+}
+
+.jsf a{
+	width: 250px;
+	height: 90px;
+	position: absolute;
+}
+
+.save{
+	width: 120px;
+	height: 30px;
+	position: absolute;
+	right: 22px;
+	top: 19px;
+}
+
+.login{
+	width: 120px;
+	height: 30px;
+	position: absolute;
+	right: 22px;
+	top: 65px;
+}
+
+/*---------------------------*/
+
+.up2{
+	width: 1000px;
+	height: 35px;
+	position: relative;
+	margin: 0 auto;
+	top: 10px;
+	background: url(../../image/1000.jpg);
+}
+
+.up2a{
+	width: 1000px;
+	height: 35px;
+	position: absolute;
+	margin: 0 auto;
+}
+
+/*----------------------------------*/
+.main{
+	width: 1000px;
+	margin: 0 auto;
+	position: relative;
+	top: 10px;
+}
+
+/*-------------------------------*/
+
+.table{
+	width: 1000px;
+	text-align: center;
+	background-color: #006699;
+	BORDER-BOTTOM: #006699 0px solid;
+	LINE-HEIGHT: 23px;
+}
+

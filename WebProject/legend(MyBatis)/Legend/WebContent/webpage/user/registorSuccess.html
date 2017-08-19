@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1 style="align:center">注册成功！</h1>
+	自动跳转时间：<p id="p1" style="color:red">5</p>
+	<a href="uLogin.jsp">直接跳转</a>
+ 	<script>
+		var t;
+		var count=5;
+		function fun(count){			
+			t=window.setTimeout(function(){
+				var p1=document.getElementById("p1");
+				--count;
+				p1.innerHTML=count.toString();
+				fun(count);
+			}, 1000);
+			
+		}
+		fun(count);
+		window.setTimeout(function(){
+			window.clearTimeout(t);
+			location.href="uLogin.jsp";
+		},5000);
+	</script> 
+</body>
+</html>

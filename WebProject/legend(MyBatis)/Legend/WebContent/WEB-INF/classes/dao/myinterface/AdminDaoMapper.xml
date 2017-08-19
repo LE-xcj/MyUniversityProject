@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.myinterface.AdminInterface">
+	 <resultMap type="pojo.Admin" id="adminMapper">
+		<id property="aName" column="aName"/>
+		<result property="apwd" column="apwd"/>
+	</resultMap>
+	
+	<resultMap type="pojo.User" id="userMap">
+		<id property="uName" column="userName"/>
+		<result property="upwd" column="pwd"/>
+		<result property="status" column="status"/>
+	</resultMap>
+	
+	<resultMap type="pojo.TableImformation" id="tbMapper">
+		<result property="gameAddress" column="gameAddress"/>
+	</resultMap>
+	
+	<select id="getAdmin" parameterType="String" resultType="admin" resultMap="adminMapper">
+		select * from t_admin where aName = #{aName}
+	</select>
+	
+	<update id="updateU" >
+		update t_user set 
+			userName=#{newName},
+			pwd = #{newpwd} ,
+			status=#{newStatus} where userName = #{uName}
+	</update>
+	
+	<select id="getUserList" resultType="user" resultMap="userMap">
+		select * from t_user where flag !=1
+	</select> 
+	
+	<update id="deleteUser" parameterType="String" >
+		update t_user set flag = 1 where userName = #{key}
+	</update>
+	
+	<update id="deleteSiFu" parameterType="String">
+		update t_sifu set flag = 1 where sIP = #{key}
+		
+	</update>
+	
+	<update id="deleteSave" parameterType="String">
+		delete from t_usersifu where sIP = #{key}
+	</update>
+	
+	<update id="updateSiFu">
+		update t_sifu set sName = #{newName},
+						  roadType = #{newRoad},
+						  detail = #{newDetail}
+				where sIP = #{sIP}						  
+	</update>
+	
+	
+ 	<select id="hasExit" resultType="int">
+		select count(*) from t_sifu where sName != #{oldName} 
+									  and sName = #{newName}
+	</select>
+	
+	<insert id="addUser">
+		insert into  t_user(userName,pwd,status,flag) values(
+			#{uName},
+			#{pwd},
+			#{status},
+			0
+		)
+	</insert>
+	
+	<select id="exit" parameterType="String" resultType="int">
+		select count(*) from t_sifu where sIP = #{sIP}
+	</select>
+	
+	<insert id="addSiFu" parameterType="tb">
+<!-- 		insert into t_sifu(sIP, sName, roadType, detail, qq, gameAddress,flag) values(
+			#{sIP},
+			#{sName},
+			#(roadType),
+			#{detail},
+			#{qq},
+			#{gameAddress},
+			0
+		) -->
+		
+		insert into t_sifu(sIP, sName,roadType,detail,qq,gameAddress) values(
+			#{sIP},
+			#{sName},
+			#{roadType},
+			#{detail},
+			#{qq},
+			#{gameAddress}
+		)
+	</insert>
+</mapper>
